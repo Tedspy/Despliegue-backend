@@ -1,20 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
+require('dotenv').config();
+
 
 const app = express();
-const PORT = 3000; //puerto del servidor de node
+const PORT = process.env.PORT; //puerto del servidor de node
 
 app.use(cors());
 app.use(express.json());
 
 // Configuración de la conexión a la base de datos MySQL
 const dbConfig = {
-    host: 'localhost',
-    port: 3306, //puerto de MySQL
-    user: 'root',
-    password: '12345678.', //contraseña de MySQL
-    database: 'futbol_colombia'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT, //puerto de MySQL
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD, //contraseña de MySQL
+    database: process.env.DB_DATABASE
 };
 
 app.get('/api/equipos', async (req, res) => {
